@@ -470,7 +470,13 @@ function Router() {
     <ErrorBoundary resetKey={location}>
       <Switch>
         <Route path="/" component={LandingPage} />
-        <Route path="/dashboard*" component={DashboardApp} />
+        <Route path="/dashboard" component={DashboardApp} />
+        <Route path="/dashboard/tasks" component={DashboardApp} />
+        <Route path="/dashboard/chat" component={DashboardApp} />
+        <Route path="/dashboard/calendar" component={DashboardApp} />
+        <Route path="/dashboard/team" component={DashboardApp} />
+        <Route path="/dashboard/analytics" component={DashboardApp} />
+        <Route path="/dashboard/settings" component={DashboardApp} />
         <Route component={NotFound} />
       </Switch>
     </ErrorBoundary>
