@@ -6,6 +6,7 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
+import DashboardApp from './dashboard';
 import nebulaVideo from '@assets/Website-Builder-Pro-Aug-20-00-32-39_1787168525987.mp4';
 
 const queryClient = new QueryClient();
@@ -469,7 +470,7 @@ function Router() {
     <ErrorBoundary resetKey={location}>
       <Switch>
         <Route path="/" component={LandingPage} />
-        <Route path="/dashboard" component={FutureDashboard} />
+        <Route path="/dashboard*" component={DashboardApp} />
         <Route component={NotFound} />
       </Switch>
     </ErrorBoundary>
