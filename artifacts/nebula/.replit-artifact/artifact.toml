@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Nebula"
+description = "A thoughtful workspace landing page and dashboard for organizing context, tasks, conversations, and team work."
+version = "1.0.0"
+id = "artifacts/nebula"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18611
+
+[services.development]
+run = "pnpm --filter @workspace/nebula run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/nebula", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/nebula/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18611"
+BASE_PATH = "/"

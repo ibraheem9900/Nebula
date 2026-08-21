@@ -1,0 +1,1 @@
+- [Vercel Vite output](vercel-vite-output.md) — keep Vercel's published directory aligned with the artifact's actual Vite output.

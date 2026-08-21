@@ -1,0 +1,182 @@
+CONTEXT: I already have a landing page built for "Nebula" (an AI 
+productivity/workflow assistant). Now extend this into a fully functional 
+app prototype — the actual product dashboard that users land on after 
+clicking "Get Started." This should feel like a real, polished, working 
+SaaS product, not just a static mockup. Use React, Tailwind CSS, Framer 
+Motion, and local state (useState/useReducer) — no real backend needed, 
+but everything in the UI must actually work and respond, using local/mock 
+data.
+
+Keep the existing landing page exactly as it is — this app dashboard is a 
+new, separate set of pages/routes that the "Get Started" button and demo 
+button should link to.
+
+=====================================================
+APP STRUCTURE — Build these as a working dashboard app
+=====================================================
+
+1. SIDEBAR NAVIGATION (persistent across all app pages)
+   - Logo at top, collapsible on smaller screens
+   - Nav items with icons: Dashboard, Tasks, AI Chat, Calendar, Team, 
+     Analytics, Settings
+   - Active route is visually highlighted with a smooth sliding indicator 
+     (not just a color change — an actual animated pill/bar that slides 
+     to the active item)
+   - User profile section at the bottom with avatar, name, and a 
+     dropdown menu (Settings, Logout) that opens with a smooth animation
+   - On mobile: sidebar collapses into a hamburger menu that slides in 
+     as an overlay drawer
+
+2. TOP BAR
+   - Search input (functional — filters visible content live as you type, 
+     even if just filtering mock data)
+   - Notification bell icon with a badge count, opens a dropdown panel 
+     showing 3-4 mock notifications with a staggered entrance animation
+   - Quick "New Task" or "New Project" button
+
+3. DASHBOARD (home page of the app)
+   - Stat cards at top (e.g., "Tasks Completed," "In Progress," "Team 
+     Members," "Productivity Score") — numbers should animate counting 
+     up from 0 when the page loads
+   - A chart/graph showing weekly activity (use a charting library like 
+     recharts) with animated bars/lines drawing in on load
+   - A "Recent Activity" feed list that staggers in item by item
+   - Everything on this page should feel alive — no static content
+
+4. TASKS PAGE (fully functional task/kanban board)
+   - Kanban-style board with columns: To Do, In Progress, Done
+   - Tasks are draggable between columns (implement real drag-and-drop — 
+     use a library like @dnd-kit or framer-motion's drag features)
+   - "Add Task" opens a modal (animated entrance — scale + fade, with a 
+     backdrop blur) where the user can type a task title and it actually 
+     appears on the board
+   - Each task card can be clicked to expand into a detail view (modal 
+     or slide-over panel) with a description field, priority tag, and a 
+     delete button that actually removes it from state
+   - Smooth reordering animation when tasks move (use Framer Motion's 
+     layout animations)
+
+5. AI CHAT PAGE (functional chat interface simulation)
+   - Chat UI with a message input at the bottom and a scrollable message 
+     history above
+   - When the user types a message and hits send, it appears instantly 
+     in the chat (as the "user" message), and after a short delay, show 
+     a typing indicator animation (three bouncing dots), followed by a 
+     simulated AI response appearing with a smooth fade/type-in effect
+   - You can hardcode a handful of varied canned responses that appear 
+     based on simple keyword matching or just cycle through — the 
+     experience should feel real even though there's no real AI backend
+   - Message bubbles slide/fade in as they appear
+
+6. CALENDAR PAGE
+   - A month-view calendar grid showing the current month
+   - A few pre-populated mock events shown as colored pills on their 
+     dates
+   - Clicking a date opens a small popover/modal to "add an event" — 
+     typing a title and saving actually adds a visible event to that 
+     date in state
+   - Smooth month navigation (prev/next arrows) with a slide transition 
+     between months
+
+7. TEAM PAGE
+   - Grid or list of team member cards (avatar, name, role, status dot 
+     for online/offline)
+   - Cards animate in with a staggered grid entrance
+   - An "Invite Member" button opens a modal with an email input (doesn't 
+     need to actually send anything, just show a success toast/animation 
+     on submit)
+
+8. ANALYTICS PAGE
+   - 2-3 different chart types (bar, line, pie/donut) showing mock 
+     productivity/usage data, each animating in as it enters the 
+     viewport
+   - A date-range toggle (Week/Month/Year) that, when clicked, actually 
+     changes the displayed mock data and re-animates the charts
+
+9. SETTINGS PAGE
+   - Profile section with editable fields (name, email) that actually 
+     update in local state when saved, with a success toast confirmation
+   - Theme toggle (dark/light mode) that ACTUALLY switches the app's 
+     theme in real time with a smooth color transition
+   - Notification preference toggles (functional switches with smooth 
+     on/off animation)
+
+=====================================================
+GLOBAL FUNCTIONALITY REQUIREMENTS
+=====================================================
+- Every button, toggle, modal, and interactive element must actually DO 
+  something — no dead/decorative buttons anywhere
+- Use React Router (or the project's existing routing) so each section 
+  is a real navigable page/route, not just a scroll anchor
+- Toast/notification system: successful actions (adding a task, saving 
+  settings, etc.) should trigger a small animated toast notification in 
+  a corner of the screen that auto-dismisses after a few seconds
+- Loading states: where relevant (e.g., initial dashboard load), show a 
+  brief skeleton-loading animation before content appears, rather than 
+  content just popping in instantly
+- Empty states: if a list/board could be empty, design a proper empty 
+  state (icon + message), not a blank area
+
+=====================================================
+ANIMATION REQUIREMENTS — EXTREME POLISH LEVEL
+=====================================================
+- Page transitions: when navigating between app pages, use a smooth 
+  fade/slide transition rather than an instant hard cut
+- Every list (tasks, notifications, team members, activity feed) should 
+  use staggered entrance animations, not all items appearing at once
+- Micro-interactions everywhere: buttons scale slightly on hover/tap, 
+  cards lift with a shadow on hover, icons have subtle rotation/bounce 
+  on interaction
+- Modals and drawers must animate in/out smoothly (scale+fade or 
+  slide+fade), never just appear/disappear instantly
+- Use Framer Motion's `layout` prop for elements that change position/
+  size (like kanban cards moving, or lists reordering) so they animate 
+  smoothly between states automatically
+- Numbers that represent stats should count up/animate when they first 
+  appear on screen
+- Maintain 60fps — animate transform/opacity, avoid animating layout-
+  triggering properties
+
+=====================================================
+MOBILE RESPONSIVENESS
+=====================================================
+- The entire app must be fully usable on mobile (375px width) — this is 
+  not optional
+- Sidebar becomes a slide-in drawer triggered by a hamburger icon
+- Kanban board on mobile: either horizontal scroll between columns, or 
+  a stacked/tabbed view — pick whichever feels more native and usable, 
+  but it must not be broken or require horizontal page scrolling
+- Charts and stat cards reflow into a single column on small screens
+- All modals/drawers adapt to full-screen or near-full-screen on mobile 
+  rather than being a tiny centered box
+- Touch targets (buttons, nav items) must be large enough to tap 
+  comfortably on mobile
+
+=====================================================
+AFTER YOU FINISH, VERIFY AND CONFIRM EACH POINT BELOW INDIVIDUALLY 
+(check each one, don't just say "done")
+=====================================================
+1. [ ] All 7 app pages (Dashboard, Tasks, AI Chat, Calendar, Team, 
+       Analytics, Settings) exist as real navigable routes
+2. [ ] Sidebar navigation works and highlights the active route with a 
+       sliding animation
+3. [ ] Tasks page: adding, viewing detail, and deleting a task all 
+       actually work and update the UI
+4. [ ] Tasks can be dragged between columns and the change persists in 
+       state
+5. [ ] AI Chat: sending a message shows it immediately, followed by a 
+       typing indicator, then a response
+6. [ ] Calendar: adding an event actually shows it on the correct date
+7. [ ] Settings: theme toggle actually switches the app's visual theme
+8. [ ] Toast notifications appear on successful actions and auto-dismiss
+9. [ ] Stat numbers animate/count up on page load
+10. [ ] Every interactive element (buttons, toggles, modals) is 
+        functional — nothing is decorative-only
+11. [ ] The full app is usable and looks correct on mobile (375px), 
+        tablet, and desktop — sidebar, kanban, charts, and modals all 
+        adapt properly
+12. [ ] No console errors anywhere in the app
+13. [ ] Navigating between pages has a smooth transition, not a hard cut
+
+List confirmation for all 13 points one by one before saying the task is 
+complete.
