@@ -4,7 +4,6 @@ import { Link, Route, Switch, Router as WouterRouter, useLocation } from 'wouter
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
-import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
 import DashboardApp from './dashboard';
 import nebulaVideo from '@assets/Website-Builder-Pro-Aug-20-00-32-39_1787168525987.mp4';
@@ -486,12 +485,10 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
-          <Router />
-        </WouterRouter>
-        <Toaster />
-      </TooltipProvider>
+      <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
+        <Router />
+      </WouterRouter>
+      <Toaster />
     </QueryClientProvider>
   );
 }
